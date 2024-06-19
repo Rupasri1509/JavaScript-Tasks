@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Table Example</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h2>STUDENT FORM</h2>
+
+<table border="2" id="table1">
+    <tr>
+        <th>Name</th>
+        <td><input id="inn" type="text"></td>
+    </tr>
+    <tr>
+        <th>Age</th>
+        <td><input id="inage" type="number"></td>
+    </tr>
+    <tr>
+        <th>Gender</th>
+        <td> 
+            <input type="radio" name="gender" id="genderm" value="Male">
+            <label for="genderm">Male</label>
+            <input type="radio" name="gender" id="genderf" value="Female">
+            <label for="genderf">Female</label><br>
+        </td>
+    </tr>
+    <tr>
+        <th>Course</th>
+        <td>
+            <select id="course">
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="C++">C++</option>
+                <option value="JavaScript">JavaScript</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td><input type="email" id="email"></td>
+    </tr>
+    <tr>
+        <th colspan="2" style="text-align:center;">
+            <button type="button" style="width : 100% ;background-color:rgb(56, 200, 56)" onclick="addInfo()">Save</button>
+        </th>
+    </tr>
+</table>
+
+<br><br><br>
+
+<table border="2" id="table2">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Course</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    <tr>
+        <td id="nameInfo"></td>
+        <td id="ageInfo"></td>
+        <td id="genderInfo"></td>
+        <td id="courseInfo"></td>
+        <td id="emailInfo"></td>
+        <td id="deleteInfo"></td>
+    </tr>
+</table>
+</div>
+<script>
+    function addInfo() {
+        // Get input values
+        var name = document.getElementById("inn").value;
+        var age = document.getElementById("inage").value;
+        var gender = document.querySelector('input[name="gender"]:checked')?.value;
+        var course = document.getElementById("course").value;
+        var email = document.getElementById("email").value;
+        
+        if(!name || !age || !gender || !course || !email){
+            alert("Please fill all the fields");
+            return;
+        }
+
+        var table=document.getElementById("table2")
+        var newRow=table.insertRow();
+
+        var nameCell=newRow.insertCell(0)
+        var ageCell=newRow.insertCell(1)
+        var genderCell=newRow.insertCell(2)
+        var courseCell=newRow.insertCell(3)
+        var emailCell=newRow.insertCell(4)
+        var deleteCell=newRow.insertCell(5)
+
+        nameCell.textContent=name
+        ageCell.textContent=age
+        genderCell.textContent=gender 
+        courseCell.textContent=course
+        emailCell.textContent=email
+        //deleteCell.innerHtml= <button>Delete</button>
+
+        var deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.style.backgroundColor="red";
+        deleteButton.onclick = function() {
+            table.deleteRow(newRow.rowIndex);
+        };
+        deleteCell.append(deleteButton);
+
+        document.getElementById("inn").value = '';
+        document.getElementById("inage").value = '';
+        document.querySelector('input[name="gender"]:checked').checked = false;
+        document.getElementById("course").value = '';
+        document.getElementById("email").value = '';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<div id="res">
+</div>
+<button onclick="update()">Click</button>
+<script>
+    var div=document.getElementById("res")
+    function update(){
+        var head=document.createElement("h1")
+        head.textContent="hello"
+        div.append(head)
+    }
+</script>
